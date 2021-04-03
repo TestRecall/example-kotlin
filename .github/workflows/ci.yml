@@ -1,0 +1,22 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Setup test dependencies
+        run: |
+          curl -sL https://get.testrecall.com/reporter | bash
+
+      - name: Build with Gradle
+        run: ./test.sh
